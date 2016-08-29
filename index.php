@@ -168,7 +168,7 @@ require_once 'classes/getWeather.php';
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero:true
+              beginAtZero:false
             },
             gridLines:{
               color:"rgba(180, 180, 180, 1)",
@@ -230,7 +230,7 @@ require_once 'classes/getWeather.php';
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero:true
+              beginAtZero:false
             },
             gridLines:{
               color:"rgba(180, 180, 180, 1)",
@@ -292,7 +292,7 @@ require_once 'classes/getWeather.php';
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero:true
+              beginAtZero:false
             },
             gridLines:{
               color:"rgba(180, 180, 180, 1)",
@@ -353,7 +353,7 @@ require_once 'classes/getWeather.php';
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero:true
+              beginAtZero:false
             },
             gridLines:{
               color:"rgba(180, 180, 180, 1)",

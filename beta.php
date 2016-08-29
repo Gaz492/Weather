@@ -121,6 +121,29 @@ require_once 'classes/getWeather.php';
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 	<script>
 		$(function () {
+
+			Highcharts.setOptions({
+				chart: {
+
+				},
+				credits: {
+					enabled: false
+				},
+				tooltip: {
+					crosshairs: true,
+					shared: true
+				},
+				plotOptions: {
+					spline: {
+						marker: {
+							radius: 4,
+							lineColor: '#4bc0c0',
+							lineWidth: 1
+						}
+					}
+				},
+			});
+
 			$('#24Hr').highcharts({
 				chart: {
 					type: 'line'
@@ -135,32 +158,18 @@ require_once 'classes/getWeather.php';
 					type: 'datetime',
 					labels: {
 						formatter: function() {
-							return moment(this.value).format("MMM-Do HH:mm");
+							return moment(this.value).format("Do HH:mm");
 						}
 					},
-					categories: [<?php for ($x = $countTempHWK -1; $x >= 0; $x--) { echo "'" . $tempRows[$x]['time'] . "', ";}?>]
+					categories: [<?php for ($x = $countTemp - 1; $x >= 0; $x--) { echo "'" . $tempRows[$x]['time'] . "', ";}?>]
 				},
 				yAxis: {
-					gridLineWidth: 1,
 					title: {
 						text: 'Temperature'
 					},
 					labels: {
 						formatter: function () {
 							return this.value + '°c';
-						}
-					}
-				},
-				tooltip: {
-					crosshairs: true,
-					shared: true
-				},
-				plotOptions: {
-					spline: {
-						marker: {
-							radius: 4,
-							lineColor: '#666666',
-							lineWidth: 1
 						}
 					}
 				},
@@ -193,26 +202,12 @@ require_once 'classes/getWeather.php';
 					categories: [<?php for ($x = $countTempHWK -1; $x >= 0; $x--) { echo "'" . $tempRowsHWK[$x]['time'] . "', ";}?>]
 				},
 				yAxis: {
-					gridLineWidth: 1,
 					title: {
 						text: 'Temperature'
 					},
 					labels: {
 						formatter: function () {
 							return this.value + '°c';
-						}
-					}
-				},
-				tooltip: {
-					crosshairs: true,
-					shared: true
-				},
-				plotOptions: {
-					spline: {
-						marker: {
-							radius: 4,
-							lineColor: '#666666',
-							lineWidth: 1
 						}
 					}
 				},
@@ -245,26 +240,12 @@ require_once 'classes/getWeather.php';
 					categories: [<?php for ($x = $countTempWK -1; $x >= 0; $x--) { echo "'" . $tempRowsWK[$x]['day'] . "', ";}?>]
 				},
 				yAxis: {
-					gridLineWidth: 1,
 					title: {
 						text: 'Temperature'
 					},
 					labels: {
 						formatter: function () {
 							return this.value + '°c';
-						}
-					}
-				},
-				tooltip: {
-					crosshairs: true,
-					shared: true
-				},
-				plotOptions: {
-					spline: {
-						marker: {
-							radius: 4,
-							lineColor: '#666666',
-							lineWidth: 1
 						}
 					}
 				},
@@ -297,26 +278,12 @@ require_once 'classes/getWeather.php';
 					categories: [<?php for ($x = $countTempYR -1; $x >= 0; $x--) { echo "'" . $tempRowsYR[$x]['month'] . "', ";} ?>]
 				},
 				yAxis: {
-					gridLineWidth: 1,
 					title: {
 						text: 'Temperature'
 					},
 					labels: {
 						formatter: function () {
 							return this.value + '°c';
-						}
-					}
-				},
-				tooltip: {
-					crosshairs: true,
-					shared: true
-				},
-				plotOptions: {
-					spline: {
-						marker: {
-							radius: 4,
-							lineColor: '#666666',
-							lineWidth: 1
 						}
 					}
 				},
