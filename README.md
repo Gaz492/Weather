@@ -16,3 +16,10 @@ sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_
 ```
 
 * Point gateway.weather.oregonscientific.com to your desired location
+
+
+##Images
+
+![Image1](http://ss.wolf.ski/ss/chrome_2016-09-12_17-08-27.jpg)
+![Image2](http://ss.wolf.ski/ss/chrome_2016-09-12_17-08-32.jpg)
+![Image3](http://ss.wolf.ski/ss/chrome_2016-09-12_17-08-36.jpg)
