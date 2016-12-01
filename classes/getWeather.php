@@ -14,7 +14,7 @@ $getTemp = "SELECT DATE_FORMAT(`date`,'%Y-%m-%d %H:00:00') AS time, ROUND(AVG(te
 $getTempHWK = "SELECT DATE_FORMAT(`date`,'%Y-%m-%d %H:00:00') AS time, ROUND(AVG(temp),1) AS avgtemp, ROUND(AVG(humid),1) as avghumid FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 1 WEEK) GROUP BY DATE_FORMAT(`date`,'%Y-%m-%d %H:00:00') - INTERVAL 1 HOUR ORDER BY DATE_FORMAT(`date`,'%Y-%m-%d %H:00:00') - INTERVAL 1 WEEK DESC";
 
 // $getTempHr = "SELECT DATE_FORMAT(`date`,'%Y-%m-%d %H:%i:00') - INTERVAL (MINUTE(`date`)%5) MINUTE AS time, ROUND(AVG(temp),1) AS avgtemp, ROUND(AVG(humid),1) as avghumid FROM cust_weatherTemp GROUP BY DATE_FORMAT(`date`,'%Y-%m-%d %H:%i:00') - INTERVAL (MINUTE(`date`)%5) MINUTE ORDER BY DATE_FORMAT(`date`,'%Y-%m-%d %H:%i:00') - INTERVAL (MINUTE(`date`)%5) MINUTE DESC LIMIT 13;";
-$getTempWk = "SELECT DATE_FORMAT(`date`, '%Y-%m-%d') AS day, ROUND(AVG(temp),1) AS avgtemp, ROUND(AVG(humid),1) as avghumid FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY DAY(`date`) ORDER BY DAY(`date`) DESC";
+$getTempWk = "SELECT DATE_FORMAT(`date`, '%Y-%m-%d') AS day, ROUND(AVG(temp),1) AS avgtemp, ROUND(AVG(humid),1) as avghumid FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY DAY(`date`) ORDER BY DATE_FORMAT(`date`, '%Y-%m-%d') DESC";
 
 $getTempYr = "SELECT DATE_FORMAT(`date`, '%Y-%m-%d') AS month, ROUND(AVG(temp),1) AS avgtemp, ROUND(AVG(humid),1) as avghumid FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 1 Year) GROUP BY MONTH(`date`) ORDER BY MONTH(`date`) DESC LIMIT 12";
 
@@ -26,6 +26,12 @@ $getHighTemp = "SELECT * FROM cust_weatherTemp WHERE temp =  ( SELECT MAX(temp) 
 
 $getLowHumid = "SELECT * FROM cust_weatherTemp WHERE humid =  ( SELECT MIN(humid) FROM cust_weatherTemp )";
 $getHighHumid = "SELECT * FROM cust_weatherTemp WHERE humid =  ( SELECT MAX(humid) FROM cust_weatherTemp )";
+
+$getLowTemp24 = "SELECT * FROM cust_weatherTemp WHERE temp =  ( SELECT MIN(temp) FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 24 HOUR))";
+$getHighTemp24 = "SELECT * FROM cust_weatherTemp WHERE temp =  ( SELECT MAX(temp) FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 24 HOUR))";
+
+$getLowHumid24 = "SELECT * FROM cust_weatherTemp WHERE humid =  ( SELECT MIN(humid) FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 24 HOUR))";
+$getHighHumid24 = "SELECT * FROM cust_weatherTemp WHERE humid =  ( SELECT MAX(humid) FROM cust_weatherTemp WHERE date > DATE_SUB(NOW(), INTERVAL 24 HOUR))";
 
 $queryBaro = $pdo->query($getBaro);
 $queryTemp = $pdo->query($getTemp);
@@ -41,6 +47,12 @@ $queryMaxTemp = $pdo->query($getHighTemp);
 
 $queryMinHumid = $pdo->query($getLowHumid);
 $queryMaxHumid = $pdo->query($getHighHumid);
+
+$queryMinTemp24 = $pdo->query($getLowTemp24);
+$queryMaxTemp24 = $pdo->query($getHighTemp24);
+
+$queryMinHumid24 = $pdo->query($getLowHumid24);
+$queryMaxHumid24 = $pdo->query($getHighHumid24);
 
 $baroRows = array();
 $tempRows = array();
@@ -62,6 +74,12 @@ $highTemp = 0.0;
 
 $lowHumid = 0.0;
 $highHumid = 0;
+
+$lowTemp24 = 0.0;
+$highTemp24 = 0.0;
+
+$lowHumid24 = 0.0;
+$highHumid24 = 0;
 
 $countB = $pdo->prepare($getBaro);
 $countB->execute();
@@ -127,6 +145,20 @@ if($queryMinHumid){
 }
 if($queryMaxHumid){
     $highHumid = $queryMaxHumid->fetch(PDO::FETCH_ASSOC);
+}
+
+if($queryMinTemp24){
+    $lowTemp24 = $queryMinTemp24->fetch(PDO::FETCH_ASSOC);
+}
+if($queryMaxTemp24){
+    $highTemp24 = $queryMaxTemp24->fetch(PDO::FETCH_ASSOC);
+}
+
+if($queryMinHumid24){
+    $lowHumid24 = $queryMinHumid24->fetch(PDO::FETCH_ASSOC);
+}
+if($queryMaxHumid24){
+    $highHumid24 = $queryMaxHumid24->fetch(PDO::FETCH_ASSOC);
 }
 
 switch ($latestBaro['forecast']) {
