@@ -15,6 +15,10 @@ header('Content-Type: application/json');
         "highTemp": "<?php echo $highTemp['temp']; ?>",
         "lowHumid": "<?php echo $lowHumid['humid']; ?>",
         "highHumid": "<?php echo $highHumid['humid']; ?>",
+        "lowTemp24": "<?php echo $lowTemp24['temp']; ?>",
+        "highTemp24": "<?php echo $highTemp24['temp']; ?>",
+        "lowHumid24": "<?php echo $lowHumid24['humid']; ?>",
+        "highHumid24": "<?php echo $highHumid24['humid']; ?>",
         "forecast": "<?php echo $forecast; ?>"
     },
     "24hr": {
