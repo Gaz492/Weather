@@ -39,6 +39,10 @@ if( isset($_POST['mac']) ){
     }
     else {
         http_response_code(401);
-        echo 'ERROR: Unauthorized macaddress ' . $mac;
+        echo 'ERROR: Unauthorized MAC address ' . $mac;
     }
+}
+else{
+    http_response_code(401);
+    echo 'ERROR: No MAC address specified';
 }
