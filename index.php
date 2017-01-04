@@ -419,7 +419,7 @@ require_once 'classes/getWeather.php';
 					type: 'datetime',
 					labels: {
 						formatter: function() {
-							return moment(this.value).format("MMMM");
+							return moment(this.value).format("MMMM YYYY");
 						}
 					},
 					categories: [<?php for ($x = $countTempYR -1; $x >= 0; $x--) { echo "'" . $tempRowsYR[$x]['month'] . "', ";} ?>]
